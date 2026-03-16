@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Michi</title>
+    <style>
+        :root {
+            --color-portada: #8b3a3a;
+            --color-paginas: #fff8f0;
+            --velocidad: 0.8s;
+        }
+
+        body {
+            margin: 0;
+            background: #e6c1a5;
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .book {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            perspective: 2000px;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform-origin: left;
+            transform-style: preserve-3d;
+            transition: transform var(--velocidad) cubic-bezier(0.645, 0.045, 0.355, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            box-sizing: border-box;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 3px 0px 20px rgba(0,0,0,0.1);
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            background: #fdf2e4;
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .cover-front {
+            background: var(--color-portada);
+            color: white;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .cover-back {
+            background: var(--color-portada);
+            color: white;
+            border-radius: 10px 0 0 10px;
+        }
+
+        .content-page {
+            background: var(--color-paginas);
+            border: 1px solid #d1bfa7;
+        }
+
+        .img-box {
+            width: 220px;
+            height: 220px;
+            background: #eee;
+            margin: 15px 0;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dashed #8b3a3a;
+            font-family: inherit;
+            resize: none;
+            text-align: center;
+            outline: none;
+            font-size: 16px;
+        }
+
+        /* Indicador de música */
+        .music-control {
+            margin-top: 20px;
+            color: #8b3a3a;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+        }
+
+        .music-control span {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        input[type="file"] { display: none; }
+        label { font-size: 12px; color: #8b3a3a; cursor: pointer; text-decoration: underline; }
+        
+    </style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+    <source src="El Libro De La Vida - Te Amo Y Más (By_ Diego Luna) (Letra) [p_1Osm5xE5Y].mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+</audio>
+
+<div class="book" id="book">
+    
+    <div class="page" onclick="flip(this)" style="z-index: 5;">
+        <div class="front cover-front">
+            <h1 style="font-size: 40px;">Para Diana</h1>
+                <div class="img-box"><img id="p1" src="img5.jpeg"></div>
+            <p>Dele Click para seguir :3</p>
+        </div>
+        <div class="back content-page">
+            <h3>Te Amo y Mas</h3>
+            <div class="img-box"><img id="p1" src="Img1.jpeg"></div>
+            <p placeholder="Un día inolvidable...">Primer que nada como te e dicho desde el primer momento que te vi me gustastes. Pero me enamore de ti por tu forma tan unica que me hicistes hacer sentir. De esa perosna que me trataba y me hacia sentir unico fue que me enamore. </p>
+        </div>
+    </div>
+
+    <div class="page" onclick="flip(this)" style="z-index: 4;">
+        <div class="front content-page">
+            <h3>Te miro y mas....</h3>
+            <div class="img-box" style="border-radius: 50%;"><img src="img2.jpeg" alt=""></div>
+            <p>Te miro y mas, y creeme que no hya otra persona la cual quisiera estar a la par, creme que me encantaria, estar a tu lado durante mucho tiempo y con el que me lo permitas. </p>
+        </div>
+        <div class="back content-page">
+            <h3>Gracias.....</h3>
+            <input type="file" id="file2" accept="image/*" onchange="preview(event, 'p2')">
+            <div class="img-box"><img src="img 3.jpeg" alt=""></div>
+            <p > Gracias por todo el tiempo que llevamos juntos se que hemos tenido algunos altibajos pero nunca e dejado de amarte y encariñarme de ti, lo unico que quiero hacer para tu vida es que tengas la oportunidad de estar con una persona que de verdad te quiere acompañar en todos tus logros, y que puedas tambien ver los mios creeme que te amo con todo el corazon. Y solo quiero ser una persona importante para ti TE AMO</p>
+        </div>
+    </div>
+
+    <div class="page" onclick="flip(this)" style="z-index: 3;">
+        <div class="front content-page">
+            <h3>TE AMOR</h3>
+            <p style="text-align: center; color: #8b3a3a; padding: 0 20px;">
+                "En cada página de mi vida, quiero que estés tú."
+            </p>
+            <div class="img-box"><img src="img 3.jpeg" alt=""></div>
+        </div>
+        <div class="back cover-back">
+            <h2>Fin ❤️</h2>
+            <p>Para siempre juntos</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="music-control">
+    🎵 Música: <span id="musicStatus">Apagada</span>
+</div>
+
+<script>
+    const music = document.getElementById('bgMusic');
+    const statusText = document.getElementById('musicStatus');
+    let musicStarted = false;
+
+    function flip(page) {
+        // Iniciar música en el primer clic si no ha empezado
+        if (!musicStarted) {
+            music.play().then(() => {
+                musicStarted = true;
+                statusText.innerText = "Sonando...";
+            }).catch(error => console.log("Esperando interacción para audio"));
+        }
+
+        if (page.classList.contains('flipped')) {
+            page.classList.remove('flipped');
+            setTimeout(reordenarZIndex, 100);
+        } else {
+            page.classList.add('flipped');
+            reordenarZIndex();
+        }
+    }
+
+    function reordenarZIndex() {
+        const pages = document.querySelectorAll('.page');
+        pages.forEach((page, index) => {
+            if (page.classList.contains('flipped')) {
+                page.style.zIndex = index;
+            } else {
+                page.style.zIndex = pages.length - index;
+            }
+        });
+    }
+
+    function preview(event, id) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById(id);
+            output.src = reader.result;
+            output.style.display = "block";
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    reordenarZIndex();
+</script>
+
+</body>
+</html>
